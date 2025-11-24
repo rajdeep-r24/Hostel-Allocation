@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="text-center mb-4">Room Details</h2>
+<table class="table table-bordered table-striped table-hover">
+  <thead class="table-dark">
+    <tr>
+      {% for col in columns %}
+        <th>{{ col.replace('_', ' ').title() }}</th>
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in rooms %}
+    <tr>
+      {% for val in row %}
+        <td>{{ val }}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

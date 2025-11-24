@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="text-center mb-4">Student Records</h2>
+<div class="text-end mb-3">
+  <a href="/add" class="btn btn-success">+ Add Student</a>
+</div>
+
+<table class="table table-bordered table-hover">
+  <thead class="table-dark">
+    <tr>
+      {% for col in columns %}
+        <th>{{ col.replace('_', ' ').title() }}</th>
+      {% endfor %}
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in students %}
+    <tr>
+      {% for val in row %}
+        <td>{{ val }}</td>
+      {% endfor %}
+      <td>
+        <a href="/edit/{{ row[0] }}" class="btn btn-warning btn-sm">Edit</a>
+        <a href="/delete/{{ row[0] }}" class="btn btn-danger btn-sm">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

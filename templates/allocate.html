@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="text-center mb-4">Manual Room Allocation</h2>
+
+<!-- Manual Allocation Form -->
+<div class="card p-4 shadow mb-5">
+    <h4 class="mb-3">Assign Student to a Room (Manual)</h4>
+    <form method="POST" class="row g-3">
+        <div class="col-md-6">
+            <label class="form-label">Select Student</label>
+            <select name="student_id" class="form-select" required>
+                <option value="">-- Select Student --</option>
+                {% for s in students %}
+                    <option value="{{ s.student_id }}">
+                        {{ s.name }} (Prefers: {{ s.preferred_room_type if s.preferred_room_type else 'N/A' }})
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label">Select Room</label>
+            <select name="room_id" class="form-select" required>
+                <option value="">-- Select Room --</option>
+                {% for r in rooms %}
+                    <option value="{{ r.room_id }}">
+                        {{ r.room_code }}{% if r.room_type %} ({{ r.room_type }}){% endif %}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="text-center mt-3">
+            <button type="submit" class="btn btn-primary px-4">Allocate Room</button>
+        </div>
+    </form>
+</div>
+
+<!-- Current Allocations -->
+<div class="card p-4 shadow">
+    <h4 class="mb-3">Current Allocations</h4>
+    {% if allocations %}
+    <table class="table table-bordered table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Student</th>
+                <th>Preferred Type</th>
+                <th>Room</th>
+                <th>Room Type</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for a in allocations %}
+            <tr>
+                <td>{{ a.student_name }}</td>
+                <td>{{ a.preferred_room_type }}</td>
+                <td>{{ a.room_code }}</td>
+                <td>{{ a.room_type }}</td>
+                <td>{{ a.allocation_date }}</td>
+                <td>
+                    <a href="/deallocate/{{ a.allocation_id }}" class="btn btn-danger btn-sm">Deallocate</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p class="text-center text-muted">No current allocations.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

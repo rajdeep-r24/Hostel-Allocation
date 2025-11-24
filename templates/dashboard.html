@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container text-center mt-5">
+    <h1 class="fw-bold text-primary mb-4">{{ hostel_name }}</h1>
+    <h5 class="text-muted mb-3">{{ hostel_address }}</h5>
+
+    <div class="card mx-auto p-3 mb-4 shadow" style="max-width: 500px;">
+        <h4>👨‍🏫 Warden: <span class="text-dark">{{ warden_name }}</span></h4>
+    </div>
+
+    <hr class="my-4">
+
+    <div class="row justify-content-center g-4">
+        <div class="col-md-3">
+            <div class="card shadow p-3 bg-light">
+                <h5>Total Students</h5>
+                <h2 class="text-primary">{{ total_students }}</h2>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card shadow p-3 bg-light">
+                <h5>Allocated Students</h5>
+                <h2 class="text-success">{{ allocated_students }}</h2>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card shadow p-3 bg-light">
+                <h5>Total Rooms</h5>
+                <h2 class="text-info">{{ total_rooms }}</h2>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card shadow p-3 bg-light">
+                <h5>Available Rooms</h5>
+                <h2 class="text-warning">{{ available_rooms }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <hr class="my-5">
+
+    <a href="/allocate" class="btn btn-primary mx-2 px-4">Manual Allocation</a>
+    <a href="/auto_allocate" class="btn btn-success mx-2 px-4">Smart Allocation</a>
+    <a href="/rooms" class="btn btn-secondary mx-2 px-4">View Rooms</a>
+</div>
+
+{% endblock %}
